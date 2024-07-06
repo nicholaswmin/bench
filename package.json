@@ -33,6 +33,7 @@
   "homepage": "https://github.com/nicholaswmin/bench#readme",
   "dependencies": {
     "asciichart": "^1.5.25",
+    "benchmrk": "github:nicholaswmin/bench",
     "console-table-printer": "^2.12.1",
     "strip-ansi": "^7.1.0"
   }

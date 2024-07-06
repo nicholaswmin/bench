@@ -2,8 +2,7 @@
 
 # 🛠️ benchmrk
 
-Benchmarking using the [Performance Measurement API][perf-hooks],
-in [node.js][nodejs]
+Benchmarking in [Node.js][nodejs], using the [User Timing API][user-timing]
 
 - [Install](#install)
 - [Usage](#usage)
@@ -182,7 +181,7 @@ await runner.run([
     cycles: 3,
     fn: async () => {
       // use timerified function:
-      const user = fetchTimerified('foo')
+      const user = await fetchTimerified('foo')
 
       user.updateName('bar')
 
@@ -210,7 +209,7 @@ runner.toTimeline()
 
 which outputs:
 
-```text         
+```bash
 ┌──────────┬───────┬───────────┐
 │     type │  name │ value     │
 ├──────────┼───────┼───────────┤
@@ -626,6 +625,7 @@ npm run test-cov
 [ci-test]: https://github.com/nicholaswmin/bench/actions/workflows/tests.yml
 
 [perf-hooks]: https://nodejs.org/api/perf_hooks.html
+[user-timing]: https://www.w3.org/TR/user-timing-2/
 [nodejs]: https://nodejs.org/en
 [timerify]: https://nodejs.org/api/perf_hooks.html#performancetimerifyfn-options
 [measure]: https://nodejs.org/api/perf_hooks.html#performancemeasurename-startmarkoroptions-endmark
