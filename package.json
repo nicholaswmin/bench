@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "NODE_ENV=test node --test test/index.spec.js",
-    "lcov": "NODE_ENV=test node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=test/lcov.info"
+    "lcov": "NODE_ENV=test node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info"
   },
   "repository": {
     "type": "git",
