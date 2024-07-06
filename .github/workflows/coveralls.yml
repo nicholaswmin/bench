@@ -21,7 +21,7 @@ jobs:
       uses: coverallsapp/github-action@v2
     -  run: npm ci
     -  run: npm run test-coverage
-    -  run: coveralls report lcov.info
+    -  run: coveralls report test/lcov.info
        env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         NODE_ENV: test
