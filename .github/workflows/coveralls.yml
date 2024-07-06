@@ -19,10 +19,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-
-    - run: npm ci
-    - run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=test/lcov.info test/index.spec.js
-    - run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls report test/lcov.info
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         NODE_ENV: test
+    - run: npm ci
+    - run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=test/lcov.info test/index.spec.js
+    - run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls report test/lcov.info
