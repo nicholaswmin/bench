@@ -2,9 +2,9 @@ import assert from 'node:assert'
 import { setTimeout } from 'timers/promises'
 import { mock, test, before, beforeEach } from 'node:test'
 
-import { PerformanceRunner } from '../../../index.js'
+import Bench from '../../../index.js'
 
-test('PerformanceRunner', async t => {
+test('Bench', async t => {
   let runner = null, result = null, rows = null
 
   await t.test('#toHistograms', async t => {
@@ -18,7 +18,7 @@ test('PerformanceRunner', async t => {
         const baz = performance.measure('baz', 'foo', 'bar')
       }
 
-      runner = new PerformanceRunner()
+      runner = new Bench()
 
       await runner.run([
         { name: 'baz', cycles: 3, fn: fn }

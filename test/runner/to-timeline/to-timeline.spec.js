@@ -2,12 +2,16 @@ import assert from 'node:assert'
 import { mock, test, before, beforeEach } from 'node:test'
 import { setTimeout } from 'timers/promises'
 
-import { PerformanceRunner } from '../../../index.js'
+import Bench from '../../../index.js'
 
-test('PerformanceRunner', async t => {
-  let runner, fooFn, barFn, bazFn
+test('Bench', async t => {
+  let runner, fooFn
 
   await t.test('#toTimeline', async t => {
+    beforeEach(() => {
+      runner = new Bench()
+    })
+
     await t.test('rejects if "toTimeline" called before a run', async t => {
       await assert.rejects(async () => {
         await runner.toTimeline()
@@ -18,17 +22,9 @@ test('PerformanceRunner', async t => {
       let result = null, rows = null
 
       await beforeEach(async () => {
-        fooFn = async () => {
-          await setTimeout(5)
-        }
-        barFn = mock.fn()
-        bazFn = mock.fn()
+        fooFn = async () => setTimeout(5)
 
-        runner = new PerformanceRunner()
-
-        await runner.run([
-          { name: 'foo', cycles: 2, fn: fooFn }
-        ])
+        await runner.run([{ name: 'foo', cycles: 2, fn: fooFn }])
       })
 
       await t.test('produces a timeline', async t => {
@@ -60,7 +56,7 @@ test('PerformanceRunner', async t => {
             foos.forEach(foo => foo.text.name.includes('foo'))
           })
 
-          await t.test('', async t => {
+          await t.test('has durations as values', async t => {
             let withMS, parsedNums
 
             beforeEach(() => {

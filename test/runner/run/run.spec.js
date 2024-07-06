@@ -1,9 +1,9 @@
 import assert from 'node:assert'
 import { mock, test, before, beforeEach } from 'node:test'
 
-import { PerformanceRunner } from '../../../index.js'
+import Bench from '../../../index.js'
 
-test('PerformanceRunner', async t => {
+test('Bench', async t => {
   let runner, fooFn, barFn, bazFn
 
   await t.test('#run', async t => {
@@ -12,7 +12,7 @@ test('PerformanceRunner', async t => {
       barFn = mock.fn()
       bazFn = mock.fn()
 
-      runner = new PerformanceRunner()
+      runner = new Bench()
 
       await runner.run([
         { name: 'foo', cycles: 2, fn: fooFn },

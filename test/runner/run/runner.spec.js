@@ -1,14 +1,14 @@
 import assert from 'node:assert'
 import { mock, test, before, beforeEach } from 'node:test'
 
-import { PerformanceRunner } from '../../../index.js'
+import Bench from '../../../index.js'
 
-test('PerformanceRunner', async t => {
+test('Bench', async t => {
   let runner
 
   await t.test('#run', async t => {
     before(() => {
-      runner = new PerformanceRunner()
+      runner = new Bench()
     })
 
     await t.test('instantiates ok without parameters', t => {

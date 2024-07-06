@@ -8,7 +8,7 @@ import errors from './src/errors.js'
 import utils from './src/utils.js'
 import Task from './src/task.js'
 
-class PerformanceRunner {
+class Bench {
   #state
 
   constructor() {
@@ -171,4 +171,4 @@ class PerformanceRunner {
   }
 }
 
-export { PerformanceRunner }
+export default Bench

@@ -10,9 +10,9 @@ Benchmarking using the [Performance Measurement API][perf-hooks], in
   * [Running tasks](#usage)
   * [Defining a task](#defining-a-task)
   * [Taking measurements](#capturing-measurements)
-    + [time durations with `performance.timerify`](#using-performancetimerify)
-    + [time durations with `performance.measure`](#using-performancemeasure)
-    + [generic values with `performance.mark`](#measuring-arbitrary-values)
+    + [timings with `performance.timerify`](#using-performancetimerify)
+    + [timings with `performance.measure`](#using-performancemeasure)
+    + [arbitrary values with `performance.mark`](#measuring-arbitrary-values)
   * [Displaying results](#displaying-results)
     + [`runner.toTimeline()`](#runnertotimeline)
     + [`runner.toHistograms()`](#runnertohistograms)
@@ -39,7 +39,7 @@ npm i https://github.com/nicholaswmin/bench
 Run 2 tasks, for 3 times each, then print a timeline of the durations:
 
 ```js
-const runner = new PerformanceRunner()
+const runner = new Bench()
 
 await runner.run([
   {
@@ -244,7 +244,7 @@ Use [`performance.measure`][measure] to capture the time difference between
 Tracking the duration between 2 marks:
 
 ```js
-const runner = new PerformanceRunner()
+const runner = new Bench()
 
 await runner.run([
   {
@@ -380,8 +380,7 @@ There are different ways of visualising measurements.
 Displaying the output as a timeline:
 
 ```js
-
-const runner = new PerformanceRunner()
+const runner = new Bench()
 
 await runner.run(tasks)
 

@@ -2,14 +2,14 @@ import assert from 'node:assert'
 import { setTimeout } from 'timers/promises'
 import { mock, test, before, beforeEach } from 'node:test'
 
-import { PerformanceRunner } from '../../../index.js'
+import Bench from '../../../index.js'
 
-test('PerformanceRunner', async t => {
+test('Bench', async t => {
   let runner = null, result = null, rows = null, foo = null, bar = null
 
   await t.test('#toPlots', async t => {
     await beforeEach(async () => {
-      runner = new PerformanceRunner()
+      runner = new Bench()
     })
 
     await t.test('when run before runner.run() has ended', async t => {
