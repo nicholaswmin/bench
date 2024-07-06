@@ -520,10 +520,14 @@ durations (ms)                                   - main task - fn:save
 
 ### Current cycle info
 
+The `fn` function is passed the following parameters:
+
 | name  	   | type      	  | description       |
 |----------- |------------	|------------------ |
 | `cycle`    | `Number`   	| The current cycle |
 | `taskname` | `String`  	  | The task name     |
+
+which gives you access to the current cycle:
 
 ```js
 runner.run([
