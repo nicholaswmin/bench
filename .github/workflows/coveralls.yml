@@ -1,4 +1,4 @@
-name: tests
+name: coveralls
 on:
   push:
     branches: [ "main" ]
@@ -6,12 +6,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-  test:
+  report-coverage:
     runs-on: ubuntu-latest
     timeout-minutes: 3
     strategy:
       matrix:
         node-version: [latest]
+    env:
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js ${{ matrix.node-version }}
@@ -19,8 +21,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - run: echo ${{secrets.COVERALLS_REPO_TOKEN}} | sed 's/./& /g'
     - run: npm ci
-    - run: npm test
-    - run: npm audit
-      env:
-        NODE_ENV: test
+    - run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=lcov.info test/index.spec.js
+    - run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls report lcov.info

@@ -43,10 +43,13 @@ test('Task', async t => {
       })
 
       await t.test('with 10 elements', async t => {
-        assert.strictEqual(entries.length, 10)
+        // We expect `10 elements` exactly but have to give some
+        // margin of error in case a `gc` entry is collected as well.
+        assert.ok(entries.length >= 10, 'There are less than 10 entries')
+        assert.ok(entries.length <= 12, 'There are more than 10 + 2 entries')
       })
 
-      await t.test('each is an Entry', async t => {
+      await t.test('each is an entry', async t => {
         entries.forEach(entry => {
           assert.strictEqual(entry.constructor.name, 'Object')
           assert.ok(Object.hasOwn(entry, 'duration'))
