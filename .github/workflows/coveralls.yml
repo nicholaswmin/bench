@@ -8,16 +8,18 @@ on:
 jobs:
   report-coverage:
     runs-on: ubuntu-latest
+    timeout-minutes: 3
+    strategy:
+      matrix:
+        node-version: [latest]
     steps:
     - uses: actions/checkout@v4
-
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Report Coveralls (Linux)
     - run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls
     - run: npm ci
     - run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=test/lcov.info test/index.spec.js
