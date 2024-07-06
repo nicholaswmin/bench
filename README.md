@@ -20,8 +20,8 @@ in [node.js][nodejs]
     + [`runner.toPlots()`](#runnertoplots)
   * [Current cycle info](#current-cycle-info)
 - [Testing](#test)
-  * [Unit tests](#unit-tests)
-  * [Test coverage](#test-coverage)
+  * [Unit tests](#run-unit-tests)
+  * [Test coverage](#print-test-coverage-report)
 - [Authors](#authors)
 - [License](#license)
 
@@ -32,7 +32,6 @@ npm i benchmrk
 ```
 
 ## Usage
-
 
 #### Example:
 
@@ -66,8 +65,8 @@ await runner.run([
 runner.toTimeline()
 ```
 
-which outputs a timeline of the task cycles with the duration
-in [milliseconds][millis]
+outputs a timeline of the task cycles with the duration in
+[milliseconds][millis]:
 
 ```text   
 ┌─────────┬──────┬───────────┐
@@ -86,6 +85,31 @@ in [milliseconds][millis]
 │   cycle │  B 3 │ 193.12 ms │
 │         │      │           │
 └─────────┴──────┴───────────┘
+```
+
+or output as a [histogram][hgram]:
+
+```js
+// ... rest of code
+
+runner.toHistograms()
+```
+
+which outputs:
+
+```text
+┌───────────┬───────┬─────────┬─────────┬─────────┬─────────────────────┐
+│      name |   min │     max │    mean │    50 % │    99 % │ deviation │
+├───────────┼───────┼─────────┼─────────┼─────────┼─────────┼───────────┤
+│     tasks │       │         │         │         │         │           │
+│           │       │         │         │         │         │           │
+│    Task A |  1 ms │  3.2 ms │ 2.13 ms │ 2.01 ms │ 2.10 ms │ 0.29 ms   │
+│    Task B │  2 ms │  3.1 ms │ 2.66 ms │ 2.44 ms │ 2.60 ms │ 0.07 ms   │
+│           │       │         │         │         │         │           │
+│     entry │       │         │         │         │         │           │
+│           │       │         │         │         │         │           │
+│ mem-usage │       │ 11.2 mb │ 36.3 mb │ 22.1 mb │ 21.2 mb │ 19.2 mb   │
+└───────────┴───────┴─────────┴─────────┴─────────┴─────────┴───────────┘
 ```
 
 ### Defining a task
@@ -117,7 +141,7 @@ Each task is an object with the following properties:
 ## Capturing measurements
 
 The call durations of each task cycle are captured and displayed
-automatically.
+automatically:
 
 However, on top of that, it's likely you'd also want to capture the durations
 of *specific* functions or steps within each task, so you can figure out where
@@ -391,7 +415,8 @@ runner.toTimeline()
 
 #### `runner.toTimeline()`
 
-Displays a detailed breakdown of each cycle, for each task as a timeline:
+Displays a detailed breakdown of each cycle,
+for each task as a timeline:
 
 ```text
 ┌──────────┬───────┬───────────┐
@@ -559,19 +584,19 @@ await runner.run([
 
 ## Test
 
-#### Install deps
+### Install deps
 
 ```bash
 npm ci
 ```
 
-#### Unit tests
+### Run unit tests
 
 ```bash
 npm test
 ```
 
-#### Test coverage
+### Print test-coverage report
 
 ```bash
 npm run test-cov

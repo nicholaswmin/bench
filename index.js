@@ -19,13 +19,13 @@ class Bench {
     this.#state = 'ready'
   }
 
-  async run(taskData = []) {
-    this.#validateTasks(taskData)
+  async run(taskItems = []) {
+    this.#validateTasks(taskItems)
 
     this.#throwIfEnded()
     this.#throwIfRunning()
 
-    this.tasks = taskData.map(task => new Task(task))
+    this.tasks = taskItems.map(item => new Task(item))
     this.#transitionState('running')
     this.loopHs.enable()
 
@@ -134,25 +134,25 @@ class Bench {
     return this
   }
 
-  #validateTasks(tasks) {
-    if (!Array.isArray(tasks) || !tasks.length)
-      throw new Error(`Expected tasks to be an Array with length`)
+  #validateTasks(taskItems) {
+    if (!Array.isArray(taskItems) || !taskItems.length)
+      throw new Error(`Expected taskItems to be an Array with length`)
 
-    tasks.forEach((task, i) => {
-      if (!task || typeof tasks !== 'object')
+    taskItems.forEach((item, i) => {
+      if (!item || typeof taskItems !== 'object')
         throw new Error(`Expected task ${i} to be an object`)
 
-      if (!Object.hasOwn(task, 'name') || task.name.length < 1)
+      if (!Object.hasOwn(item, 'name') || item.name.length < 1)
         throw new Error(`Expected task ${i} to have a valid name property `)
 
-      if (!Object.hasOwn(task, 'fn') || typeof task.fn !== 'function')
+      if (!Object.hasOwn(item, 'fn') || typeof item.fn !== 'function')
         throw new Error(`Expected task ${i} to have a valid fn property `)
 
-      if (!Object.hasOwn(task, 'cycles') || task.cycles < 1)
+      if (!Object.hasOwn(item, 'cycles') || item.cycles < 1)
         throw new Error(`Expected task.${i}.cycles to be a positive integer`)
     })
 
-    return tasks
+    return taskItems
   }
 
   #throwIfNotEnded() {
