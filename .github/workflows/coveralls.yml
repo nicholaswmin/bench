@@ -18,11 +18,10 @@ jobs:
         cache: 'npm'
 
     - name: Report Coveralls (Linux)
-      run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls
-      run: npm ci
-      run: npm run lcov
-      run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=test/lcov.info test/index.spec.js
-      run: coveralls report test/lcov.info
+    - run: curl -sL https://coveralls.io/coveralls-linux.tar.gz | tar -xz && ./coveralls
+    - run: npm ci
+    - run: node --test --experimental-test-coverage --test-reporter=lcov --test-reporter-destination=test/lcov.info test/index.spec.js
+    - run: coveralls report test/lcov.info
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
         NODE_ENV: test
