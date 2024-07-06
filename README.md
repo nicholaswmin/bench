@@ -1,5 +1,7 @@
 [![test-workflow][test-workflow-badge]][ci-test]
 
+[![Coverage Status][coveralls-badge]][coveralls-report]
+
 # 🛠️ benchmrk
 
 Benchmarking in [Node.js][nodejs], using the [User Timing API][user-timing]
@@ -595,10 +597,10 @@ npm ci
 npm test
 ```
 
-### Print test-coverage report
+### Generate test-coverage
 
 ```bash
-npm run test-cov
+npm run lcov
 ```
 
 ## Authors
@@ -623,6 +625,9 @@ npm run test-cov
 
 [test-workflow-badge]: https://github.com/nicholaswmin/bench/actions/workflows/tests.yml/badge.svg
 [ci-test]: https://github.com/nicholaswmin/bench/actions/workflows/tests.yml
+
+[coveralls-badge]: https://coveralls.io/repos/github/nicholaswmin/bench/badge.svg?branch=main
+[coveralls-report]: https://coveralls.io/github/nicholaswmin/bench?branch=main
 
 [perf-hooks]: https://nodejs.org/api/perf_hooks.html
 [user-timing]: https://www.w3.org/TR/user-timing-2/
