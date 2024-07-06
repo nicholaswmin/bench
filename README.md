@@ -3,7 +3,7 @@
 # 🛠️ bench
 
 Benchmarking using the [Performance Measurement API][perf-hooks], in
-[Node.js][nodejs]
+[node.js][nodejs]
 
 - [Install](#install)
 - [Usage](#usage)
