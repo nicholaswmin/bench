@@ -2,8 +2,8 @@
 
 # 🛠️ benchmrk
 
-Benchmarking using the [Performance Measurement API][perf-hooks], in
-[node.js][nodejs]
+Benchmarking using the [Performance Measurement API][perf-hooks],
+in [node.js][nodejs]
 
 - [Install](#install)
 - [Usage](#usage)
