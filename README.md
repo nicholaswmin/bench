@@ -1,6 +1,4 @@
-[![test-workflow][test-workflow-badge]][ci-test]
-
-[![Coverage Status][coveralls-badge]][coveralls-report]
+[![test-workflow][test-workflow-badge]][ci-test] [![Coverage Status][coveralls-badge]][coveralls-report]
 
 # 🛠️ benchmrk
 
