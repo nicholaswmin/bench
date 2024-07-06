@@ -1,6 +1,6 @@
 [![test-workflow][test-workflow-badge]][ci-test]
 
-# 🛠️ bench
+# 🛠️ benchmrk
 
 Benchmarking using the [Performance Measurement API][perf-hooks], in
 [node.js][nodejs]
@@ -14,8 +14,8 @@ Benchmarking using the [Performance Measurement API][perf-hooks], in
     + [timings with `performance.measure`](#using-performancemeasure)
     + [arbitrary values with `performance.mark`](#measuring-arbitrary-values)
   * [Displaying results](#displaying-results)
-    + [`runner.toTimeline()`](#runnertotimeline)
     + [`runner.toHistograms()`](#runnertohistograms)
+    + [`runner.toTimeline()`](#runnertotimeline)
     + [`runner.toEntries()`](#runnertoentries)
     + [`runner.toPlots()`](#runnertoplots)
   * [Current cycle info](#current-cycle-info)
@@ -28,7 +28,7 @@ Benchmarking using the [Performance Measurement API][perf-hooks], in
 ## Install
 
 ```bash
-npm i https://github.com/nicholaswmin/bench
+npm i benchmrk
 ```
 
 ## Usage
@@ -36,22 +36,21 @@ npm i https://github.com/nicholaswmin/bench
 
 #### Example:
 
-Run 2 tasks, for 3 times each, then print a timeline of the durations:
+Run 2 tasks, each one for 3 times, then log a report describing the
+duration of each run:
 
 ```js
-const runner = new Bench()
+import Runner from 'benchmrk'
+
+const runner = new Runner()
 
 await runner.run([
   {
     name: 'Task A',
-    cycles: 2,
+    cycles: 3,
     fn: function() {
-      // runs 2 times ...
-
       slowFunctionFoo()
       slowFunctionBar()
-
-      // do more work here ...
     }
   },
 
@@ -59,11 +58,7 @@ await runner.run([
     name: 'Task B',
     cycles: 3,
     fn: async function() {
-      // runs 3 times ...
-
       await slowAsyncFunctionBaz()
-
-      // do more async work here ...
     }
   }
 ])
@@ -71,13 +66,12 @@ await runner.run([
 runner.toTimeline()
 ```
 
-which outputs a timeline of the task cycles:
-
-> `value` is the total call duration in [milliseconds][millis].
+which outputs a timeline of the task cycles with the duration
+in [milliseconds][millis]
 
 ```text   
 ┌─────────┬──────┬───────────┐
-│    type │ name │ value     │
+│    type │ name │ duration  │
 ├─────────┼──────┼───────────┤
 │ Task: A │      │           │
 │         │      │           │
@@ -96,9 +90,9 @@ which outputs a timeline of the task cycles:
 
 ### Defining a task
 
-`runner.run(tasks)` accepts an array of tasks.
+`runner.run(tasks)` accepts an array of *tasks*.
 
-A single task should be an object with the following properties:
+Each task is an object with the following properties:
 
 | property  | type      	| description                     | required 	|
 |---------	|------------	|--------------------------------	|----------	|
@@ -109,29 +103,21 @@ A single task should be an object with the following properties:
 ##### Example:
 
 ```js
-await runner.run([
-  {
-    name: 'Task A',
-    cycles: 10,
-    fn: function() {
-      // do work here
-    }
-  },
+// A task
 
-  {
-    name: 'Task B',
-    cycles: 20,
-    fn: async function() {
-      // do work here
-    }
+{
+  name: 'Task A',
+  cycles: 10,
+  fn: function() {
+    // will run 10 times
   }
-])
-
+}
 ```
 
 ## Capturing measurements
 
-The call durations of each task cycle are captured and displayed automatically.
+The call durations of each task cycle are captured and displayed
+automatically.
 
 However, on top of that, it's likely you'd also want to capture the durations
 of *specific* functions or steps within each task, so you can figure out where
@@ -146,44 +132,37 @@ methods:
 
 ### Using `performance.timerify`
 
-Use [`performance.timerify`][timerify] to wrap functions which automatically
-tracks the function duration.
+[`performance.timerify`][timerify] wraps a function within a new
+function that measures the running time of the wrapped function.
 
 #### Example
 
 Tracking the duration of `fetch` and `save` functions:
 
-> assume they are real functions that get/save a user from/to a database
+> assume `fetch`/`save` are real functions to get/save a user from/to a database
 
 ```js
 // function A:
-const fetch = user =>
-  new Promise(resolve =>
-    setTimeout(() => resolve({ name: 'foo' })), 250)
-
+const fetch = () => new Promise(res => setTimeout(res, 50))
 // function B:
-const save = user =>
-  new Promise(resolve => setTimeout(() => resolve()), 250)
-
+const save = () => new Promise(res => setTimeout(res, 50))
 
 // timerify "function A":
 const fetchTimerified = performance.timerify(fetch)
-
 // timerify "function B":
 const saveTimerified = performance.timerify(save)
-
 
 await runner.run([
   {
     name: 'A',
     cycles: 3,
     fn: async () => {
-      // call timerified "function A":
+      // use timerified function:
       const user = fetchTimerified('foo')
 
       user.updateName('bar')
 
-      // call timerified "function B":
+      // use timerified function:
       await saveTimerified(user)
     }
   },
@@ -196,7 +175,7 @@ await runner.run([
 
       user.updateName('baz')
 
-      // call timerified "function B":
+      // use timerified function:
       await saveTimerified(user)
     }
   }
@@ -236,12 +215,12 @@ which outputs:
 
 ### Using `performance.measure`
 
-Use [`performance.measure`][measure] to capture the time difference between
-2 marks, set via [`performance.mark`][mark].
+Use [`performance.measure`][measure] to capture a time measurement
+between two marks, set via [`performance.mark`][mark].
 
 #### Example
 
-Tracking the duration between 2 marks:
+Measure the duration between 2 marks, mark `a` and mark `b`:
 
 ```js
 const runner = new Bench()
@@ -267,7 +246,15 @@ await runner.run([
     }
   },
 
-  // rest of tasks ...
+  {
+    name: 'B',
+    cycles: 2,
+    fn: async ({ cycle, taskname }) => {
+      const user = new User()
+
+      await save(user)
+    }
+  }
 ])
 
 runner.toTimeline()
@@ -276,29 +263,37 @@ runner.toTimeline()
 which outputs:
 
 ```text
-            timeline                 
 ┌──────────┬───────┬───────────┐
-│     type │  name │ value     │
+│     type │  name │ duration  │
 ├──────────┼───────┼───────────┤
 │  Task: A │       │           │
 │          │       │           │
 │    cycle │   A 1 │ 141.71 ms │
 |  measure │   a-b │ 120.20 ms │
-│          │       │           │
-│    cycle │   A 2 │ 225.74 ms │
-|  measure │   a-b │ 189.18 ms │
+|          |       |           |
+│    cycle │   A 2 │ 125.74 ms │
+|  measure │   a-b │  89.18 ms │
 │          │       │           │
 │    cycle │   A 3 │  98.79 ms │
 |  measure │   a-b │  44.35 ms │
 │          │       │           │
+|  Task: B |       |           |
+|          |       |           |
+│    cycle │   B 1 │ 100.64 ms │
+│    cycle │   B 2 │  90.12 ms │
+│    cycle │   B 3 │  76.88 ms │
+│          │       │           │
 └──────────┴───────┴───────────┘
 ```
 
+There's additional ways of using `performance.measure` which can be found
+in the [`Performance:Measure` docs][measure].
+
 ### Measuring arbitrary values
 
-You can measure arbitrary values, apart from time durations, using
-[`performance.mark`][mark] and passing as the `detail` parameter an
-object with these properties:
+Apart from time durations, you can also measure arbitrary values using
+[`performance.mark`][mark] and passing an object with these properties in
+the `detail` parameter:
 
 | property  | type      	| description      | required 	|
 |---------	|------------	|----------------- |----------- |
@@ -308,7 +303,8 @@ object with these properties:
 
 ##### Example
 
-Tracking memory usage and displaying it in a histogram:
+Capturing memory usage at the end of each cycle, then displaying
+it's `min`/`mean`/`max` value distribution at the end of the run.
 
 ```js
 await runner.run([
@@ -386,7 +382,8 @@ await runner.run(tasks)
 
 runner.toTimeline()
 
-// or ...
+// or:
+
 // runner.toHistograms()
 // runner.toEntries()
 // runner.toPlots()
@@ -394,7 +391,7 @@ runner.toTimeline()
 
 #### `runner.toTimeline()`
 
-Produces a detailed breakdown of the timeline of the cycles for each task:
+Displays a detailed breakdown of each cycle, for each task as a timeline:
 
 ```text
 ┌──────────┬───────┬───────────┐
@@ -428,7 +425,7 @@ Produces a detailed breakdown of the timeline of the cycles for each task:
 #### `runner.toHistograms()`
 
 Produces a [histogram][hgram] with `min`/`mean`/`max` and `percentiles` for
-each measurement:
+each measurement.
 
 ```text
 ┌──────────────┬───────┬─────────┬─────────┬─────────┬─────────┬─────────┬─────┐
@@ -447,47 +444,55 @@ each measurement:
 
 #### `runner.toEntries()`
 
-Returns an array of all emitted [`PerformanceEntry`][perf-entry] entries
-for each task.
+Returns an array of all recorded [`PerformanceEntry`][perf-entry]
+entries of each task, as [JSONs][perf-entry-json].
+
 
 ```js
-
 console.log(runner.toEntries())
-
-/*
-Logs:
 
 [
   {
     name: 'Task A',
     entries: [
       {
-        name: 'foo',
-        entryType: 'mark',
-        startTime: 100.539,
-        duration: 0,
-        detail: { value: 'foo', unit: 'foo' }
+        name: 'fetch',
+        entryType: 'function',
+        startTime: 112.391,
+        duration: 0.00533300000000736,
       },
 
-      // more entries ...
+      {
+        name: 'save',
+        entryType: 'function',
+        startTime: 129.125,
+        duration: 0.00851780000000122,
+      },
+
+      // more "Task A" entries ...
     ]
   },
+
   {
     name: 'Task B',
     entries: [
       {
         name: 'save',
         entryType: 'function',
-        startTime: 167.683,
-        duration: 0.00533300000000736,
+        startTime: 160.221,
+        duration: 0.00237910000000368,
+      },
+      {
+        name: 'foo',
+        entryType: 'mark',
+        startTime: 201.539,
+        duration: 0
       },
 
-      // more entries ...
+      // more "Task B" entries ...
     ]
   }
 ]
-
-*/
 ```
 
 #### `runner.toPlots()`
@@ -529,17 +534,21 @@ The `fn` function is passed the following parameters:
 which gives you access to the current cycle:
 
 ```js
-runner.run([
+const runner = new Bench()
+
+await runner.run([
   {
     name: 'A',
     cycles: 3,
     fn: async ({ cycle, taskname }) => {
       console.log(cycle)
+
       // '1' for 1st cycle
       // '2' for 2nd cycle
       // '3' for 3rd/last cycle
 
       console.log(taskname)
+
       // 'A'
     }
   },
@@ -580,8 +589,8 @@ npm run test-cov
 > Copyright 2024  
 > Nicholas Kyriakides
 >
-> Permission is hereby granted, free of charge, to any person obtaining a copy
-> of this software and associated documentation files (the "Software"),
+> Permission is hereby granted, free of charge, to any person obtaining
+> a copy of this software and associated documentation files (the "Software"),
 > to deal in the Software without restriction, including without limitation the
 > rights to use, copy, modify, merge, publish, distribute, sublicense,
 > and/or sell copies of the Software, and to permit persons to whom the
@@ -597,7 +606,8 @@ npm run test-cov
 [measure]: https://nodejs.org/api/perf_hooks.html#performancemeasurename-startmarkoroptions-endmark
 [mark]: https://nodejs.org/api/perf_hooks.html#performancemarkname-options
 [hgram]: https://en.wikipedia.org/wiki/Histogram
-[perf-entry]: https://nodejs.org/api/perf_hooks.html#class-performanceentry
+[perf-entry]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry
+[perf-entry-json]: https://developer.mozilla.org/en-US/docs/Web/API/PerformanceEntry/toJSON
 [nicholaswmin]: https://github.com/nicholaswmin
 [mit-no-attr]: https://github.com/aws/mit-0
 [millis]: https://en.wikipedia.org/wiki/Millisecond
