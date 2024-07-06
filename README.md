@@ -36,7 +36,7 @@ npm i https://github.com/nicholaswmin/bench
 
 #### Example:
 
-Run 2 tasks, for 5 times each, then print a timeline of the durations:
+Run 2 tasks, for 3 times each, then print a timeline of the durations:
 
 ```js
 const runner = new PerformanceRunner()
@@ -83,7 +83,7 @@ which outputs a timeline of the task cycles:
 │         │      │           │
 │   cycle │  A 1 │ 321.44 ms │
 │   cycle │  A 2 │ 250.95 ms │
-│         │      │           │
+│   cycle │  A 3 │ 212.20 ms │
 │         │      │           │
 │ Task: B │      │           │
 │         │      │           │
