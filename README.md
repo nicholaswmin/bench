@@ -1,6 +1,6 @@
 [![test-workflow][test-workflow-badge]][ci-test] [![Coverage Status][coveralls-badge]][coveralls-report]
 
-# 🛠️ benchmrk
+# ⏱️️ benchmrk
 
 Benchmarking in [Node.js][nodejs], using the [User Timing API][user-timing]
 
