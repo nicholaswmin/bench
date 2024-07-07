@@ -20,7 +20,7 @@ Benchmarking in [Node.js][nodejs], using the [User Timing API][user-timing]
   * [Current cycle info](#current-cycle-info)
 - [Testing](#test)
   * [Unit tests](#run-unit-tests)
-  * [Test coverage](#print-test-coverage-report)
+  * [Test coverage](#generate-test-coverage)
 - [Authors](#authors)
 - [License](#license)
 
@@ -526,19 +526,19 @@ The chart displays the duration of each cycle and any
 
 ```text
                                 Task: "B"
-durations (ms)                                   - main task - fn:save
+durations (ms)                                 - - main task    -- fn:save
 
 457.00 ┤                                                            
 416.80 ┤                                             
 376.60 ┼───────────────╮                                                      
 336.40 ┤               │                                                        
-296.20 ┤               ╰───────────────╮                                              
-256.00 ┤                               |                                               
-215.80 ┤                               |                               
-175.60 ┤                               |            
-135.40 ┤               ╭─────────────────────────────────────────────╮                
-95.20  ┤               │               |                             │                
-55.00  ┼───────────────╯               |                             |
+296.20 ┤               ╰────────────────╮                                              
+256.00 ┤                                |                                               
+215.80 ┤                                |                               
+175.60 ┤                                |            
+135.40 ┤──────────────────────────────────────────────────────────────╮                
+95.20  ┤                                |                             │                
+55.00  ┼                                |                             |
  ───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬
     0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  17  18     
                                                                    cycles
