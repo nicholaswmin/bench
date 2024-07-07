@@ -7,10 +7,10 @@ import Bench from '../../../index.js'
 test('Bench', async t => {
   let runner = null, result = null, rows = null, foo = null, bar = null
 
-  await t.test('#toHistograms', async t => {
+  await t.test('#toHistogram', async t => {
     await t.test('rejects if called before a run', async t => {
       await assert.rejects(async () => {
-        await runner.toHistograms()
+        await runner.toHistogram()
       })
     })
 
@@ -27,7 +27,7 @@ test('Bench', async t => {
           { name: 'bar', cycles: 3, fn: fn }
         ])
 
-        result = await runner.toHistograms()
+        result = await runner.toHistogram()
 
         foo = result.table.rows.find(row => row.text.name.includes('foo'))
         bar = result.table.rows.find(row => row.text.name.includes('bar'))

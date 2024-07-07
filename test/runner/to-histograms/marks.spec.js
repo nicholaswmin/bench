@@ -7,7 +7,7 @@ import Bench from '../../../index.js'
 test('Bench', async t => {
   let runner = null, result = null, rows = null
 
-  await t.test('#toHistograms', async t => {
+  await t.test('#toHistogram', async t => {
     let result = null, foo = null, bar = null, baz = null
 
     await beforeEach(async () => {
@@ -24,7 +24,7 @@ test('Bench', async t => {
         { name: 'baz', cycles: 3, fn: fn }
       ])
 
-      result = await runner.toHistograms()
+      result = await runner.toHistogram()
 
       foo = result.table.rows.find(row => row.text.name.includes('foo'))
       bar = result.table.rows.find(row => row.text.name.includes('bar'))

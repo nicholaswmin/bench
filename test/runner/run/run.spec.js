@@ -102,7 +102,7 @@ test('Bench', async t => {
     await t.test('rejects if run called after end', async t => {
       await assert.rejects(async () => {
         await runner.run()
-        await runner.toHistograms()
+        await runner.toHistogram()
         await runner.run()
       })
     })

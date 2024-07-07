@@ -69,7 +69,7 @@ class Bench {
     return table
   }
 
-  toHistograms() {
+  toHistogram() {
     this.#throwIfNotEnded()
 
     const table = new Table({

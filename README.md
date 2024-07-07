@@ -13,7 +13,7 @@ Benchmarking in [Node.js][nodejs], using the [User Timing API][user-timing]
     + [timings with `performance.measure`](#using-performancemeasure)
     + [arbitrary values with `performance.mark`](#measuring-arbitrary-values)
   * [Displaying results](#displaying-results)
-    + [`runner.toHistograms()`](#runnertohistograms)
+    + [`runner.toHistogram()`](#runnertoHistogram)
     + [`runner.toTimeline()`](#runnertotimeline)
     + [`runner.toEntries()`](#runnertoentries)
     + [`runner.toPlots()`](#runnertoplots)
@@ -91,7 +91,7 @@ or output as a [histogram][hgram]:
 ```js
 // ... rest of code
 
-runner.toHistograms()
+runner.toHistogram()
 ```
 
 which outputs:
@@ -366,7 +366,7 @@ await runner.run([
   }
 ])
 
-runner.toHistograms()
+runner.toHistogram()
 ```
 
 which outputs:
@@ -407,7 +407,7 @@ runner.toTimeline()
 
 // or:
 
-// runner.toHistograms()
+// runner.toHistogram()
 // runner.toEntries()
 // runner.toPlots()
 ```
@@ -446,7 +446,7 @@ for each task as a timeline:
 └──────────┴───────┴───────────┘
 ```
 
-#### `runner.toHistograms()`
+#### `runner.toHistogram()`
 
 Produces a [histogram][hgram] with `min`/`mean`/`max` and `percentiles` for
 each measurement.
