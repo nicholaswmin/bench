@@ -139,14 +139,12 @@ Each task is an object with the following properties:
 
 ## Capturing measurements
 
-The call durations of each task cycle are captured and displayed
-automatically:
+The durations of each task cycle are captured and displayed automatically.
 
-However, on top of that, it's likely you'd also want to capture the durations
-of *specific* functions or steps within each task, so you can figure out where
-most of the time is spent.
+You might also need to capture the durations of *specific* functions/steps
+within each task, so you can figure out where most of the time is spent.
 
-In these cases you can use the following [Performance Measurement][perf-hooks]
+For these use-cases, you can use these [Performance Measurement][perf-hooks]
 methods:
 
 - [`performance.timerify`][timerify]
@@ -162,7 +160,8 @@ function that measures the running time of the wrapped function.
 
 Tracking the duration of `fetch` and `save` functions:
 
-> assume `fetch`/`save` are real functions to get/save a user from/to a database
+> assume `fetch`/`save` are real functions to get/save a user from/to
+> a database
 
 ```js
 // function A:
@@ -243,7 +242,7 @@ between two marks, set via [`performance.mark`][mark].
 
 #### Example
 
-Measure the duration between 2 marks, mark `a` and mark `b`:
+Measure the duration between mark `a` and mark `b`:
 
 ```js
 const runner = new Bench()
@@ -314,9 +313,8 @@ in the [`Performance:Measure` docs][measure].
 
 ### Measuring arbitrary values
 
-Apart from time durations, you can also measure arbitrary values using
-[`performance.mark`][mark] and passing an object with these properties in
-the `detail` parameter:
+Measure arbitrary values using [`performance.mark`][mark] and passing an
+`object` with these properties in the `detail` parameter:
 
 | property  | type      	| description      | required 	|
 |---------	|------------	|----------------- |----------- |
@@ -326,8 +324,8 @@ the `detail` parameter:
 
 ##### Example
 
-Capturing memory usage at the end of each cycle, then displaying
-it's `min`/`mean`/`max` value distribution at the end of the run.
+Capturing memory usage at the end of each cycle,
+then displaying the cumulative `min`/`mean`/`max` values:
 
 ```js
 await runner.run([
@@ -530,17 +528,17 @@ The chart displays the duration of each cycle and any
                                 Task: "B"
 durations (ms)                                   - main task - fn:save
 
-457.00 ┤                                               ╭─────────────────                
-416.80 ┤                               ╭───────────────╯                              
-376.60 ┼───────────────╮               │                                              
-336.40 ┤               │               │                                              
-296.20 ┤               ╰───────────────╯                                              
-256.00 ┤                                                                              
-215.80 ┤                                                              
-175.60 ┤                               ╭─────────────────────────────╮                
-135.40 ┤               ╭───────────────╯                             │                
-95.20  ┤               │                                             │                
-55.00  ┼───────────────╯                                             |
+457.00 ┤                                                            
+416.80 ┤                                             
+376.60 ┼───────────────╮                                                      
+336.40 ┤               │                                                        
+296.20 ┤               ╰───────────────╮                                              
+256.00 ┤                               |                                               
+215.80 ┤                               |                               
+175.60 ┤                               |            
+135.40 ┤               ╭─────────────────────────────────────────────╮                
+95.20  ┤               │               |                             │                
+55.00  ┼───────────────╯               |                             |
  ───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬───┬
     0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  17  18     
                                                                    cycles
