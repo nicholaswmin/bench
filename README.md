@@ -318,7 +318,7 @@ Measure arbitrary, non-duration values by passing a `detail` object to
 [`performance.mark`][mark]:
 
 ```js
-performance.mark('mark-a', { detail: { value: 10, unit: 'bytes' } })
+performance.mark('user-size', { detail: { value: 10, unit: 'bytes' } })
 ```
 
 The passed object should have the following properties:
