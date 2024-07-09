@@ -314,14 +314,19 @@ in the [`Performance:Measure` docs][measure].
 
 ### Measuring arbitrary values
 
-Measure arbitrary values using [`performance.mark`][mark] and passing an
-`object` with these properties in the `detail` parameter:
+Measure arbitrary, non-duration values by passing a `detail` object to
+[`performance.mark`][mark]:
+
+```js
+performance.mark('mark-a', { detail: { value: 10, unit: 'bytes' } })
+```
+
+The passed object should have the following properties:
 
 | property  | type      	| description      | required 	|
 |---------	|------------	|----------------- |----------- |
 | `value`   | `Number`   	| tracked value    | yes 	      |
 | `unit`    | `String`  	| label for value  | yes 	      |
-
 
 ##### Example
 
