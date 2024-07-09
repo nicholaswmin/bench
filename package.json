@@ -1,7 +1,7 @@
 {
   "name": "benchmrk",
   "type": "module",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Benchmarking using the Performance Measurement API",
   "main": "index.js",
   "directories": {
@@ -34,7 +34,6 @@
   "homepage": "https://github.com/nicholaswmin/bench#readme",
   "dependencies": {
     "asciichart": "^1.5.25",
-    "benchmrk": "github:nicholaswmin/bench",
     "console-table-printer": "^2.12.1",
     "strip-ansi": "^7.1.0"
   }
