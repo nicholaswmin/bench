@@ -1,4 +1,4 @@
-[![test-workflow][test-workflow-badge]][ci-test] [![Coverage Status][coveralls-badge]][coveralls-report]
+[![test-workflow][test-workflow-badge]][ci-test] [![Coverage Status][coveralls-badge]][coveralls-report] ![npm bundle size][npm-size]
 
 # :stopwatch: benchmrk
 
@@ -626,12 +626,17 @@ npm run lcov
 > and/or sell copies of the Software, and to permit persons to whom the
 > Software is furnished to do so.
 
+<!--- Badges -->
 
 [test-workflow-badge]: https://github.com/nicholaswmin/benchmrk/actions/workflows/tests.yml/badge.svg
 [ci-test]: https://github.com/nicholaswmin/benchmrk/actions/workflows/tests.yml
 
 [coveralls-badge]: https://coveralls.io/repos/github/nicholaswmin/benchmrk/badge.svg?branch=main
 [coveralls-report]: https://coveralls.io/github/nicholaswmin/benchmrk?branch=main
+
+[npm-size]: https://img.shields.io/bundlephobia/minzip/benchmrk
+
+<!--- /Badges -->
 
 [perf-hooks]: https://nodejs.org/api/perf_hooks.html
 [user-timing]: https://www.w3.org/TR/user-timing-2/
