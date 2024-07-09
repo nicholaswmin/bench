@@ -527,13 +527,13 @@ The chart displays the duration of each cycle and any
 
 ```text
                                 Task: "B"
-durations (ms)                                 - - main task    -- fn:save
+durations (ms)                            - - - main task   --- fn:save
 
 457.00 ┤                                                            
 416.80 ┤                                             
-376.60 ┼───────────────╮                                                      
+376.60 ┼- - - - - - - ─╮                                                      
 336.40 ┤               │                                                        
-296.20 ┤               ╰────────────────╮                                              
+296.20 ┤               ╰- - - - - - - - ╮                                              
 256.00 ┤                                |                                               
 215.80 ┤                                |                               
 175.60 ┤                                |            
