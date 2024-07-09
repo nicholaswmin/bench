@@ -628,8 +628,8 @@ npm run lcov
 
 <!--- Badges -->
 
-[test-workflow-badge]: https://github.com/nicholaswmin/benchmrk/actions/workflows/tests.yml/badge.svg
-[ci-test]: https://github.com/nicholaswmin/benchmrk/actions/workflows/tests.yml
+[test-workflow-badge]: https://github.com/nicholaswmin/benchmrk/actions/workflows/test.yml/badge.svg
+[ci-test]: https://github.com/nicholaswmin/benchmrk/actions/workflows/test.yml
 
 [coverage-badge]: https://coveralls.io/repos/github/nicholaswmin/benchmrk/badge.svg?branch=main
 [coverage-report]: https://coveralls.io/github/nicholaswmin/benchmrk?branch=main
