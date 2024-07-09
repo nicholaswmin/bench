@@ -245,7 +245,7 @@ between two marks, set via [`performance.mark`][mark].
 Measure the duration between mark `a` and mark `b`:
 
 ```js
-const runner = new Bench()
+const runner = new Benchmrk()
 
 await runner.run([
   {
@@ -397,7 +397,7 @@ There are different ways of visualising measurements.
 Displaying the output as a timeline:
 
 ```js
-const runner = new Bench()
+const runner = new Benchmrk()
 
 await runner.run(tasks)
 
@@ -556,7 +556,7 @@ The `fn` function is passed the following parameters:
 which gives you access to the current cycle:
 
 ```js
-const runner = new Bench()
+const runner = new Benchmrk()
 
 await runner.run([
   {
@@ -619,11 +619,11 @@ npm run lcov
 > Software is furnished to do so.
 
 
-[test-workflow-badge]: https://github.com/nicholaswmin/bench/actions/workflows/tests.yml/badge.svg
-[ci-test]: https://github.com/nicholaswmin/bench/actions/workflows/tests.yml
+[test-workflow-badge]: https://github.com/nicholaswmin/benchmrk/actions/workflows/tests.yml/badge.svg
+[ci-test]: https://github.com/nicholaswmin/benchmrk/actions/workflows/tests.yml
 
-[coveralls-badge]: https://coveralls.io/repos/github/nicholaswmin/bench/badge.svg?branch=main
-[coveralls-report]: https://coveralls.io/github/nicholaswmin/bench?branch=main
+[coveralls-badge]: https://coveralls.io/repos/github/nicholaswmin/benchmrk/badge.svg?branch=main
+[coveralls-report]: https://coveralls.io/github/nicholaswmin/benchmrk?branch=main
 
 [perf-hooks]: https://nodejs.org/api/perf_hooks.html
 [user-timing]: https://www.w3.org/TR/user-timing-2/

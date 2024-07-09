@@ -2,14 +2,14 @@ import assert from 'node:assert'
 import { mock, test, before, beforeEach } from 'node:test'
 import { setTimeout } from 'timers/promises'
 
-import Bench from '../../../index.js'
+import Benchmrk from '../../../index.js'
 
-test('Bench', async t => {
+test('Benchmrk', async t => {
   let runner, fooFn
 
   await t.test('#toTimeline', async t => {
     beforeEach(() => {
-      runner = new Bench()
+      runner = new Benchmrk()
     })
 
     await t.test('rejects if "toTimeline" called before a run', async t => {

@@ -2,15 +2,15 @@ import assert from 'node:assert'
 import { setTimeout } from 'timers/promises'
 import { mock, test, before, beforeEach } from 'node:test'
 
-import Bench from '../../../index.js'
+import Benchmrk from '../../../index.js'
 
-test('Bench', async t => {
+test('Benchmrk', async t => {
   let runner = null, tasks = [], taskEntries = []
 
   await t.test('#toEntries', async t => {
     await t.test('when run before runner.run() has ended', async t => {
       await beforeEach(async () => {
-        runner = new Bench()
+        runner = new Benchmrk()
       })
 
       await t.test('when run before runner.run() has ended', async t => {
@@ -22,7 +22,7 @@ test('Bench', async t => {
 
     await t.test('when run after runner.run() has ended', async t => {
       await beforeEach(async t => {
-        runner = new Bench()
+        runner = new Benchmrk()
 
         tasks = [
           {

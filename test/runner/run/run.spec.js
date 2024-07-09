@@ -1,9 +1,9 @@
 import assert from 'node:assert'
 import { mock, test, before, beforeEach } from 'node:test'
 
-import Bench from '../../../index.js'
+import Benchmrk from '../../../index.js'
 
-test('Bench', async t => {
+test('Benchmrk', async t => {
   let runner, fooFn, barFn, bazFn
 
   await t.test('#run', async t => {
@@ -12,7 +12,7 @@ test('Bench', async t => {
       barFn = mock.fn()
       bazFn = mock.fn()
 
-      runner = new Bench()
+      runner = new Benchmrk()
 
       await runner.run([
         { name: 'foo', cycles: 2, fn: fooFn },
