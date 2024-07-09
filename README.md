@@ -38,9 +38,9 @@ Run 2 tasks, each one for 3 times, then log a report describing the
 duration of each run:
 
 ```js
-import Runner from 'benchmrk'
+import Benchmrk from 'benchmrk'
 
-const runner = new Runner()
+const runner = new Benchmrk()
 
 await runner.run([
   {
@@ -164,15 +164,16 @@ Tracking the duration of `fetch` and `save` functions:
 > a database
 
 ```js
-// function A:
+// normal functions:
 const fetch = () => new Promise(res => setTimeout(res, 50))
-// function B:
 const save = () => new Promise(res => setTimeout(res, 50))
 
-// timerify "function A":
+// timerify both of them:
 const fetchTimerified = performance.timerify(fetch)
-// timerify "function B":
 const saveTimerified = performance.timerify(save)
+
+
+const runner = new Benchmrk()
 
 await runner.run([
   {
