@@ -1,7 +1,7 @@
 {
   "name": "benchmrk",
   "type": "module",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Benchmarking using the Performance Measurement API",
   "main": "index.js",
   "directories": {
