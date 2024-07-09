@@ -527,7 +527,9 @@ The chart displays the duration of each cycle and any
 
 ```text
                                 Task: "B"
-durations (ms)                            - - - main task   --- fn:save
+
+                                      - - - main task   --- fn:save
+durations (ms)  
 
 457.00 ┤                                                            
 416.80 ┤                                             
